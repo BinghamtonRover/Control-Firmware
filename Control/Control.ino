@@ -75,7 +75,7 @@ void loop() {
 	voltageSensor.update();
 	relays.update();
 }
-
+///DELETE LATER//////////////////////////////////////////////////////////////
 void sendData() {
   DriveData driveData = DriveData_init_zero;
   RelaysData relayData = RelaysData_init_zero;
