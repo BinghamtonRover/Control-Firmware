@@ -38,11 +38,10 @@ BurtTimer dataTimer(DATA_SEND_INTERVAL, sendData);
 BurtTimer motorTimer(MOTOR_UPDATE_INTERVAL, updateMotors);
 BurtTimer blinkTimer(blinkInterval, updateLedStrip);
 
-
 void setup() {
+	Serial.println("Initializing Drive subsystem");
   pinMode(errorPin, OUTPUT);
 	Serial.begin(9600);
-	Serial.println("Initializing Drive subsystem");
 	Serial.println("Initializing software...");
 	motorCan.setup();
 	serial.setup();
@@ -77,33 +76,75 @@ void loop() {
 	relays.update();
 }
 
-
 void sendData() {
-  DriveData d_data = DriveData_init_zero;
-  Relaydata r_data = RelayData_init_zero;
+  DriveData driveData = DriveData_init_zero;
+  RelaysData relayData = RelaysData_init_zero;
 
-  ControlBoardData c_data = ControlBoardData_init_zero;
+  ControlBoardData controlData = ControlBoardData_init_zero;
 
-  c_data.relays = r_data;
-  data.version = version;
-	data.has_version = true;
- serial.send(&data);
-	serial.send(&buttons.data);
-	serial.send(&motors.data);
-	serial.send(&cameras.data);
-	serial.send(&led_strip.data);
-	serial.send(&voltageSensor.data);
-	serial.send(&temperatureSensor.data);
-	serial.send(&relays.data);
+	// Drive Motor Data
+	driveData.has_front_left_motor = motors.data.has_front_left_motor;
+	driveData.has_front_right_motor = motors.data.has_front_right_motor;
+	driveData.has_middle_left_motor = motors.data.has_middle_left_motor;
+	driveData.has_middle_right_motor = motors.data.has_middle_right_motor;
+	driveData.has_back_left_motor = motors.data.has_back_left_motor;
+	driveData.has_back_right_motor = motors.data.has_back_right_motor;
 
+	driveData.front_left_motor = motors.data.front_left_motor;
+	driveData.front_right_motor = motors.data.front_right_motor;
+	driveData.middle_left_motor = motors.data.middle_left_motor;
+	driveData.middle_right_motor = motors.data.middle_right_motor;
+	driveData.back_left_motor = motors.data.back_left_motor;
+	driveData.back_right_motor = motors.data.back_right_motor;
+
+	// Drive output data
+	driveData.set_left = motors.data.set_left;
+	driveData.left = motors.data.left;
+	driveData.set_right = motors.data.set_right;
+	driveData.right = motors.data.right;
+	driveData.set_throttle = motors.data.set_throttle;
+	driveData.throttle = motors.data.throttle;
+
+	// Drive cameras data
+	driveData.front_swivel = cameras.data.front_swivel;
+	driveData.rear_swivel = cameras.data.rear_swivel;
+
+	// Temperature sensors data
+	driveData.battery_temperature = temperatureSensor.data.battery_temperature;
+
+	// Voltage sensor data
+	driveData.battery_voltage = voltageSensor.data.battery_voltage;
+
+	// LED strip data
+	driveData.color = led_strip.data.color;
+
+	// Version
+	driveData.has_version = true;
+	driveData.version = version;
+
+	controlData.has_drive = true;
+	controlData.drive = driveData;
+
+	relayData.arm = relays.arm.relayData;
+	relayData.science = relays.science.relayData;
+	relayData.drive = relays.drive.relayData;
+	relayData.frontLeftMotor = relays.frontLeftMotor.relayData;
+	relayData.frontRightMotor = relays.frontRightMotor.relayData;
+	relayData.backLeftMotor = relays.backLeftMotor.relayData;
+	relayData.backRightMotor = relays.backRightMotor.relayData;
+
+	controlData.has_relays = true;
+	controlData.relays = relayData;
+
+	serial.send(&controlData);
 }
 
 void handleCommand(const uint8_t* data, int length) {
 	auto command = BurtProto::decode<ControlBoardCommand>(data, length, ControlBoardCommand_fields);
-	buttons.handleCommand(command.Drive);
-	motors.handleCommand(command.Drive);
-	cameras.handleCommand(command.Drive);
-	led_strip.handleCommand(command.Drive);
+	buttons.handleCommand(command.drive);
+	motors.handleCommand(command.drive);
+	cameras.handleCommand(command.drive);
+	led_strip.handleCommand(command.drive);
 
-	relays.handleCommand(command.Relays);
+	relays.handleCommand(command.relays);
 }
