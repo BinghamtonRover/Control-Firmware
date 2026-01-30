@@ -6,22 +6,20 @@
 
 /// @brief Define the Teensy pins for the relays [Subject to change]
 // Drive Motors
-const int bLeftRelayPin = 23;
-const int bLeftLedPin = 2;
-const int bRightRelayPin = 22;
-const int bRightLedPin = 3;
-const int fLeftRelayPin = 21;
-const int fLeftLedPin = 4;
-const int fRightRelayPin = 20;
-const int fRightLedPin = 5;
 
-// Arm, Science, and Drive
-const int armRelayPin = 37;
-const int armLedPin = 28;
-const int scienceRelayPin = 36;
-const int scienceLedPin = 29;
-const int driveRelayPin = 35;
-const int driveLedPin = 30;
+const int bLeftRelayPin = 25;
+const int bRightRelayPin = 19;
+const int fLeftRelayPin = 29;
+const int fRightRelayPin = 15;
+
+// Dampening Relays
+
+const int lDampRelay = 32;
+const int rDampRelay = 39;
+
+// Arm and Science
+const int armRelayPin = 38;
+const int scienceRelayPin = 7;
 
 /// @brief Class to represent a relay on the relay board
 ///
