@@ -127,7 +127,6 @@ void sendData() {
 
 	relayData.arm = relays.arm.relayData;
 	relayData.science = relays.science.relayData;
-	relayData.drive = relays.drive.relayData;
 	relayData.frontLeftMotor = relays.frontLeftMotor.relayData;
 	relayData.frontRightMotor = relays.frontRightMotor.relayData;
 	relayData.backLeftMotor = relays.backLeftMotor.relayData;

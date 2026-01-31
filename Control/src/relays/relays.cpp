@@ -61,11 +61,6 @@ void Relays::setup() {
     science.setup();
     Serial.println("Science relay initialized");
     delay(250);
-    
-    drive.setup();
-    Serial.println("Drive relay initialized");
-    delay(250);
-    
 }
 
 void Relays::update() {
@@ -75,7 +70,6 @@ void Relays::update() {
     frontRightMotor.update();
     arm.update();
     science.update();
-    drive.update();
 }
 
 void Relays::handleCommand(RelaysCommand command) {
@@ -85,7 +79,6 @@ void Relays::handleCommand(RelaysCommand command) {
     frontRightMotor.handleCommand(command.frontRightMotor);
     arm.handleCommand(command.arm);
     science.handleCommand(command.science);
-    drive.handleCommand(command.drive);
 }
 
 // void OverrideSwitch::setup() {

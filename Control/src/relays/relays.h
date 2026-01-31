@@ -42,7 +42,7 @@ class Relay {
         /// @brief Constructs a Relay object with specified output pin.
         /// @param outputPin The Teensy pin that the relay is connected to.
         Relay(int relayPin) : 
-            relayPin(relayPin), 
+            relayPin(relayPin)
             { }
             
             /// @brief Set up the relay by setting the pin mode
