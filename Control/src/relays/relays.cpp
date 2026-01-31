@@ -2,7 +2,6 @@
 
 void Relay::setup() {
     pinMode(relayPin, OUTPUT);
-    pinMode(ledPin, OUTPUT);
 }
 
 void Relay::update() {
@@ -15,13 +14,11 @@ void Relay::update() {
 
 void Relay::turnOn() { 
     digitalWrite(relayPin, HIGH);
-    digitalWrite(ledPin, HIGH);
     relayData = BoolState_ON;
 }
 
 void Relay::turnOff() {
     digitalWrite(relayPin, LOW);
-    digitalWrite(ledPin, LOW);
     relayData = BoolState_OFF;
 }
 
