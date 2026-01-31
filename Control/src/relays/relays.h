@@ -98,13 +98,12 @@ class Relays {
         Relay frontRightMotor = Relay(fRightRelayPin);
 
         // Dampening Motors
-
-        Relay lDampRelay = Relay(lDampRelayPin) 
+        Relay lDampRelay = Relay(lDampRelayPin);
+        Relay rDampRelay = Relay(rDampRelayPin);
 
         // Arm, Science, and Drive
         Relay arm = Relay(armRelayPin);
         Relay science = Relay(scienceRelayPin);
-        Relay drive = Relay(driveRelayPin);
 };
 
 #endif
