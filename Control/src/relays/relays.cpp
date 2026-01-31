@@ -82,11 +82,11 @@ void Relays::setup() {
     Serial.println("Front right motor relay engaged");
     delay(250);
 
-    lDampRelay.turnOff();
+    lDampRelay.turnOn();   // temporary fix until dampening motors are implemenented
     Serial.println("Left dampener relay engaged");
     delay(250);
 
-    rDampRelay.turnOff();
+    rDampRelay.turnOn();   // temporary fix until dampening motors are implemenented
     Serial.println("Right dampener relay engaged");
     delay(250);
 

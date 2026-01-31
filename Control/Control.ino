@@ -73,7 +73,7 @@ void loop() {
 	temperatureSensor.update();
 	buttons.update();
 	voltageSensor.update();
-	relays.update();
+	// relays.update();
 }
 // haha oops -- remove later
 void sendData() {
