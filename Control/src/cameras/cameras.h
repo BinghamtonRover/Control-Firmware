@@ -1,10 +1,10 @@
 #include <Servo.h>
 #include "../drive.pb.h"
 
-const int frontSwivelPin = 33;
-const int frontTiltPin = 36;
-const int backSwivelPin = 4;
-const int backTiltPin = 5;
+const int frontSwivelPin = ;
+const int frontTiltPin = ;
+const int backSwivelPin = ;
+const int backTiltPin = ;
 
 /// A collection of servos that control the rover's camera system.
 class Cameras {

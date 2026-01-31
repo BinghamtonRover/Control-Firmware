@@ -3,9 +3,9 @@
 
 const int blinkInterval = 250;  // ms
 
-const int redPin = 14;
-const int greenPin = 15;
-const int bluePin = 16;
+const int redPin = 34;
+const int greenPin = 35;
+const int bluePin = 36;
 
 /// The RGB LED strip that goes around the rover.
 class LedStrip {
