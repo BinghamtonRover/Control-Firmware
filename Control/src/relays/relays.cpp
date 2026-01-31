@@ -40,26 +40,62 @@ void Relays::setup() {
 
     backLeftMotor.setup();
     Serial.println("Back left motor relay initialized");
-    delay(250);
 
     backRightMotor.setup();
     Serial.println("Back right motor relay initialized");
-    delay(250);
 
     frontLeftMotor.setup();
     Serial.println("Front left motor relay initialized");
-    delay(250);
-    
+
     frontRightMotor.setup();
     Serial.println("Front right motor relay initialized");
-    delay(250);
-    
+
     arm.setup();
     Serial.println("Arm relay initialized");
-    delay(250);
-    
+
     science.setup();
     Serial.println("Science relay initialized");
+
+    lDampRelay.setup();
+    Serial.println("Left dampener relay engaged");
+    delay(250);
+
+    rDampRelay.setup();
+    Serial.println("Right dampener relay engaged");
+    delay(250);
+    
+    delay(250);
+
+    backLeftMotor.turnOn();
+    Serial.println("Back left motor relay engaged");
+    delay(250);
+
+    backRightMotor.turnOn();
+    Serial.println("Back right motor relay engaged");
+    delay(250);
+
+    frontLeftMotor.turnOn();
+    Serial.println("Front left motor relay engaged");
+    delay(250);
+    
+    frontRightMotor.turnOn();
+    Serial.println("Front right motor relay engaged");
+    delay(250);
+
+    lDampRelay.turnOn();
+    Serial.println("Left dampener relay engaged");
+    delay(250);
+
+    rDampRelay.turnOn();
+    Serial.println("Right dampener relay engaged");
+    delay(250);
+
+    arm.turnOn();
+    Serial.println("Arm relay engaged");
+    delay(250);
+    
+    science.turnOn();
+    Serial.println("Science relay engaged");
     delay(250);
 }
 

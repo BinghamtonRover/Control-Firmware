@@ -12,7 +12,7 @@
 
 const Version version = {major: 1, minor: 2};
 
-const int errorPin = 9;
+const int errorPin = 33;
 
 void handleCommand(const uint8_t* data, int length);
 
@@ -40,7 +40,7 @@ BurtTimer blinkTimer(blinkInterval, updateLedStrip);
 
 void setup() {
 	Serial.println("Initializing Drive subsystem");
-  pinMode(errorPin, OUTPUT);
+  	pinMode(errorPin, OUTPUT);
 	Serial.begin(9600);
 	Serial.println("Initializing software...");
 	motorCan.setup();
@@ -73,7 +73,7 @@ void loop() {
 	temperatureSensor.update();
 	buttons.update();
 	voltageSensor.update();
-	relays.update();
+	// relays.update();
 }
 // haha oops -- remove later
 void sendData() {
