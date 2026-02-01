@@ -13,23 +13,23 @@
 #endif
 
 /* Struct definitions */
-typedef struct _ControlBoardCommand {
+typedef struct _ControlCommand {
     bool has_version;
     Version version;
     bool has_drive;
     DriveCommand drive;
     bool has_relays;
     RelaysCommand relays;
-} ControlBoardCommand;
+} ControlCommand;
 
-typedef struct _ControlBoardData {
+typedef struct _ControlData {
     bool has_version;
     Version version;
     bool has_drive;
     DriveData drive;
     bool has_relays;
     RelaysData relays;
-} ControlBoardData;
+} ControlData;
 
 
 #ifdef __cplusplus
@@ -37,51 +37,51 @@ extern "C" {
 #endif
 
 /* Initializer values for message structs */
-#define ControlBoardCommand_init_default         {false, Version_init_default, false, DriveCommand_init_default, false, RelaysCommand_init_default}
-#define ControlBoardData_init_default            {false, Version_init_default, false, DriveData_init_default, false, RelaysData_init_default}
-#define ControlBoardCommand_init_zero            {false, Version_init_zero, false, DriveCommand_init_zero, false, RelaysCommand_init_zero}
-#define ControlBoardData_init_zero               {false, Version_init_zero, false, DriveData_init_zero, false, RelaysData_init_zero}
+#define ControlCommand_init_default              {false, Version_init_default, false, DriveCommand_init_default, false, RelaysCommand_init_default}
+#define ControlData_init_default                 {false, Version_init_default, false, DriveData_init_default, false, RelaysData_init_default}
+#define ControlCommand_init_zero                 {false, Version_init_zero, false, DriveCommand_init_zero, false, RelaysCommand_init_zero}
+#define ControlData_init_zero                    {false, Version_init_zero, false, DriveData_init_zero, false, RelaysData_init_zero}
 
 /* Field tags (for use in manual encoding/decoding) */
-#define ControlBoardCommand_version_tag          1
-#define ControlBoardCommand_drive_tag            2
-#define ControlBoardCommand_relays_tag           3
-#define ControlBoardData_version_tag             1
-#define ControlBoardData_drive_tag               2
-#define ControlBoardData_relays_tag              3
+#define ControlCommand_version_tag               1
+#define ControlCommand_drive_tag                 2
+#define ControlCommand_relays_tag                3
+#define ControlData_version_tag                  1
+#define ControlData_drive_tag                    2
+#define ControlData_relays_tag                   3
 
 /* Struct field encoding specification for nanopb */
-#define ControlBoardCommand_FIELDLIST(X, a) \
+#define ControlCommand_FIELDLIST(X, a) \
 X(a, STATIC,   OPTIONAL, MESSAGE,  version,           1) \
 X(a, STATIC,   OPTIONAL, MESSAGE,  drive,             2) \
 X(a, STATIC,   OPTIONAL, MESSAGE,  relays,            3)
-#define ControlBoardCommand_CALLBACK NULL
-#define ControlBoardCommand_DEFAULT NULL
-#define ControlBoardCommand_version_MSGTYPE Version
-#define ControlBoardCommand_drive_MSGTYPE DriveCommand
-#define ControlBoardCommand_relays_MSGTYPE RelaysCommand
+#define ControlCommand_CALLBACK NULL
+#define ControlCommand_DEFAULT NULL
+#define ControlCommand_version_MSGTYPE Version
+#define ControlCommand_drive_MSGTYPE DriveCommand
+#define ControlCommand_relays_MSGTYPE RelaysCommand
 
-#define ControlBoardData_FIELDLIST(X, a) \
+#define ControlData_FIELDLIST(X, a) \
 X(a, STATIC,   OPTIONAL, MESSAGE,  version,           1) \
 X(a, STATIC,   OPTIONAL, MESSAGE,  drive,             2) \
 X(a, STATIC,   OPTIONAL, MESSAGE,  relays,            3)
-#define ControlBoardData_CALLBACK NULL
-#define ControlBoardData_DEFAULT NULL
-#define ControlBoardData_version_MSGTYPE Version
-#define ControlBoardData_drive_MSGTYPE DriveData
-#define ControlBoardData_relays_MSGTYPE RelaysData
+#define ControlData_CALLBACK NULL
+#define ControlData_DEFAULT NULL
+#define ControlData_version_MSGTYPE Version
+#define ControlData_drive_MSGTYPE DriveData
+#define ControlData_relays_MSGTYPE RelaysData
 
-extern const pb_msgdesc_t ControlBoardCommand_msg;
-extern const pb_msgdesc_t ControlBoardData_msg;
+extern const pb_msgdesc_t ControlCommand_msg;
+extern const pb_msgdesc_t ControlData_msg;
 
 /* Defines for backwards compatibility with code written before nanopb-0.4.0 */
-#define ControlBoardCommand_fields &ControlBoardCommand_msg
-#define ControlBoardData_fields &ControlBoardData_msg
+#define ControlCommand_fields &ControlCommand_msg
+#define ControlData_fields &ControlData_msg
 
 /* Maximum encoded size of messages (where known) */
-#define CONTROL_PB_H_MAX_SIZE                    ControlBoardData_size
-#define ControlBoardCommand_size                 143
-#define ControlBoardData_size                    357
+#define CONTROL_PB_H_MAX_SIZE                    ControlData_size
+#define ControlCommand_size                      143
+#define ControlData_size                         357
 
 #ifdef __cplusplus
 } /* extern "C" */

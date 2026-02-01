@@ -6,10 +6,10 @@
 #error Regenerate this file with the current version of nanopb generator.
 #endif
 
-PB_BIND(ControlBoardCommand, ControlBoardCommand, AUTO)
+PB_BIND(ControlCommand, ControlCommand, AUTO)
 
 
-PB_BIND(ControlBoardData, ControlBoardData, 2)
+PB_BIND(ControlData, ControlData, 2)
 
 
 
