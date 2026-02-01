@@ -10,7 +10,7 @@
 #define DATA_SEND_INTERVAL 50  // ms (relays was 250 ms, drive was 50ms, so chose the smaller one)
 #define MOTOR_UPDATE_INTERVAL 10  // ms
 
-const Version version = {major: 1, minor: 1};
+const Version version = {major: 1, minor: 3};
 
 const int errorPin = 33;
 
