@@ -2,7 +2,7 @@
 
 #include "pinouts.h"
 #include "src/utils/BURT_utils.h"
-#include "src/control_board.pb.h"
+#include "src/control.pb.h"
 
 #define DRIVE_COMMAND_ID   0x53
 #define DRIVE_DATA_ID      0x14
@@ -10,9 +10,9 @@
 #define DATA_SEND_INTERVAL 50  // ms (relays was 250 ms, drive was 50ms, so chose the smaller one)
 #define MOTOR_UPDATE_INTERVAL 10  // ms
 
-const Version version = {major: 1, minor: 2};
+const Version version = {major: 1, minor: 3};
 
-const int errorPin = 9;
+const int errorPin = 33;
 
 void handleCommand(const uint8_t* data, int length);
 
@@ -40,7 +40,7 @@ BurtTimer blinkTimer(blinkInterval, updateLedStrip);
 
 void setup() {
 	Serial.println("Initializing Drive subsystem");
-  pinMode(errorPin, OUTPUT);
+  	pinMode(errorPin, OUTPUT);
 	Serial.begin(9600);
 	Serial.println("Initializing software...");
 	motorCan.setup();
@@ -74,8 +74,11 @@ void loop() {
 	buttons.update();
 	voltageSensor.update();
 	relays.update();
+
+	//debugging
+	//debugging
 }
-///DELETE LATER//////////////////////////////////////////////////////////////
+
 void sendData() {
   DriveData driveData = DriveData_init_zero;
   RelaysData relayData = RelaysData_init_zero;
@@ -122,12 +125,13 @@ void sendData() {
 	driveData.has_version = true;
 	driveData.version = version;
 
+	controlData.version = version;
+
 	controlData.has_drive = true;
 	controlData.drive = driveData;
 
 	relayData.arm = relays.arm.relayData;
 	relayData.science = relays.science.relayData;
-	relayData.drive = relays.drive.relayData;
 	relayData.frontLeftMotor = relays.frontLeftMotor.relayData;
 	relayData.frontRightMotor = relays.frontRightMotor.relayData;
 	relayData.backLeftMotor = relays.backLeftMotor.relayData;
@@ -137,6 +141,10 @@ void sendData() {
 	controlData.relays = relayData;
 
 	serial.send(&controlData);
+	
+	// debugging
+	// Serial.println(controlData.version);
+	// debugging
 }
 
 void handleCommand(const uint8_t* data, int length) {

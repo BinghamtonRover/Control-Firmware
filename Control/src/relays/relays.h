@@ -6,22 +6,21 @@
 
 /// @brief Define the Teensy pins for the relays [Subject to change]
 // Drive Motors
-const int bLeftRelayPin = 23;
-const int bLeftLedPin = 2;
-const int bRightRelayPin = 22;
-const int bRightLedPin = 3;
-const int fLeftRelayPin = 21;
-const int fLeftLedPin = 4;
-const int fRightRelayPin = 20;
-const int fRightLedPin = 5;
 
-// Arm, Science, and Drive
-const int armRelayPin = 37;
-const int armLedPin = 28;
-const int scienceRelayPin = 36;
-const int scienceLedPin = 29;
-const int driveRelayPin = 35;
-const int driveLedPin = 30;
+const int bLeftRelayPin = 25;
+const int bRightRelayPin = 19;
+const int fLeftRelayPin = 29;
+const int fRightRelayPin = 15;
+
+// Dampening Relays
+
+const int lDampRelayPin = 32;
+const int rDampRelayPin = 39;
+
+// Arm and Science
+
+const int armRelayPin = 38;
+const int scienceRelayPin = 7;
 
 /// @brief Class to represent a relay on the relay board
 ///
@@ -37,16 +36,13 @@ const int driveLedPin = 30;
 class Relay {
     private: 
         int relayPin;
-        int ledPin;
         bool softwareState = false;        
         
         public: 
         /// @brief Constructs a Relay object with specified output pin.
         /// @param outputPin The Teensy pin that the relay is connected to.
-        /// @param ledPin The Teensy pin that the LED is connected to.
-        Relay(int relayPin, int ledPin) : 
-            relayPin(relayPin), 
-            ledPin(ledPin)
+        Relay(int relayPin) : 
+            relayPin(relayPin)
             { }
             
             /// @brief Set up the relay by setting the pin mode
@@ -97,15 +93,18 @@ class Relays {
 
         /// @brief Instantiate all RelaySwitch objects
         // Drive Motors
-        Relay backLeftMotor = Relay(bLeftRelayPin, bLeftLedPin);
-        Relay backRightMotor = Relay(bRightRelayPin, bRightLedPin);
-        Relay frontLeftMotor = Relay(fLeftRelayPin, fLeftLedPin);
-        Relay frontRightMotor = Relay(fRightRelayPin, fRightLedPin);
+        Relay backLeftMotor = Relay(bLeftRelayPin);
+        Relay backRightMotor = Relay(bRightRelayPin);
+        Relay frontLeftMotor = Relay(fLeftRelayPin);
+        Relay frontRightMotor = Relay(fRightRelayPin);
+
+        // Dampening Motors
+        Relay lDampRelay = Relay(lDampRelayPin);
+        Relay rDampRelay = Relay(rDampRelayPin);
 
         // Arm, Science, and Drive
-        Relay arm = Relay(armRelayPin, armLedPin);
-        Relay science = Relay(scienceRelayPin, scienceLedPin);
-        Relay drive = Relay(driveRelayPin, driveLedPin);
+        Relay arm = Relay(armRelayPin);
+        Relay science = Relay(scienceRelayPin);
 };
 
 #endif

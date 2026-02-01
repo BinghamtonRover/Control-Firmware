@@ -2,7 +2,6 @@
 
 void Relay::setup() {
     pinMode(relayPin, OUTPUT);
-    pinMode(ledPin, OUTPUT);
 }
 
 void Relay::update() {
@@ -15,13 +14,11 @@ void Relay::update() {
 
 void Relay::turnOn() { 
     digitalWrite(relayPin, HIGH);
-    digitalWrite(ledPin, HIGH);
     relayData = BoolState_ON;
 }
 
 void Relay::turnOff() {
     digitalWrite(relayPin, LOW);
-    digitalWrite(ledPin, LOW);
     relayData = BoolState_OFF;
 }
 
@@ -43,32 +40,63 @@ void Relays::setup() {
 
     backLeftMotor.setup();
     Serial.println("Back left motor relay initialized");
-    delay(250);
 
     backRightMotor.setup();
     Serial.println("Back right motor relay initialized");
-    delay(250);
 
     frontLeftMotor.setup();
     Serial.println("Front left motor relay initialized");
-    delay(250);
-    
+
     frontRightMotor.setup();
     Serial.println("Front right motor relay initialized");
-    delay(250);
-    
+
     arm.setup();
     Serial.println("Arm relay initialized");
-    delay(250);
-    
+
     science.setup();
     Serial.println("Science relay initialized");
+
+    lDampRelay.setup();
+    Serial.println("Left dampener relay engaged");
+    delay(250);
+
+    rDampRelay.setup();
+    Serial.println("Right dampener relay engaged");
     delay(250);
     
-    drive.setup();
-    Serial.println("Drive relay initialized");
+    delay(250);
+
+    backLeftMotor.turnOn();
+    Serial.println("Back left motor relay engaged");
+    delay(250);
+
+    backRightMotor.turnOn();
+    Serial.println("Back right motor relay engaged");
+    delay(250);
+
+    frontLeftMotor.turnOn();
+    Serial.println("Front left motor relay engaged");
     delay(250);
     
+    frontRightMotor.turnOn();
+    Serial.println("Front right motor relay engaged");
+    delay(250);
+
+    lDampRelay.turnOn();   // temporary fix until dampening motors are implemenented
+    Serial.println("Left dampener relay engaged");
+    delay(250);
+
+    rDampRelay.turnOn();   // temporary fix until dampening motors are implemenented
+    Serial.println("Right dampener relay engaged");
+    delay(250);
+
+    arm.turnOn();
+    Serial.println("Arm relay engaged");
+    delay(250);
+    
+    science.turnOn();
+    Serial.println("Science relay engaged");
+    delay(250);
 }
 
 void Relays::update() {
@@ -78,7 +106,6 @@ void Relays::update() {
     frontRightMotor.update();
     arm.update();
     science.update();
-    drive.update();
 }
 
 void Relays::handleCommand(RelaysCommand command) {
@@ -88,7 +115,6 @@ void Relays::handleCommand(RelaysCommand command) {
     frontRightMotor.handleCommand(command.frontRightMotor);
     arm.handleCommand(command.arm);
     science.handleCommand(command.science);
-    drive.handleCommand(command.drive);
 }
 
 // void OverrideSwitch::setup() {
