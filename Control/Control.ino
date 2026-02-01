@@ -20,7 +20,7 @@ void handleMotorOutput(const CanMessage& message) {
   motors.handleMotorOutput(message);
 }
 
-BurtSerial serial(Device::Device_CONTROL_BOARD, handleCommand, ControlBoardData_fields, ControlBoardData_size);
+BurtSerial serial(Device::Device_CONTROL_BOARD, handleCommand, ControlData_fields, ControlData_size);
 
 // AK motors send data in the format (0x29 << 8) | MOTOR_ID
 //
@@ -83,7 +83,7 @@ void sendData() {
   DriveData driveData = DriveData_init_zero;
   RelaysData relayData = RelaysData_init_zero;
 
-  ControlBoardData controlData = ControlBoardData_init_zero;
+  ControlData controlData = ControlData_init_zero;
 
 	// Drive Motor Data
 	driveData.has_front_left_motor = motors.data.has_front_left_motor;
@@ -132,10 +132,10 @@ void sendData() {
 
 	relayData.arm = relays.arm.relayData;
 	relayData.science = relays.science.relayData;
-	relayData.frontLeftMotor = relays.frontLeftMotor.relayData;
-	relayData.frontRightMotor = relays.frontRightMotor.relayData;
-	relayData.backLeftMotor = relays.backLeftMotor.relayData;
-	relayData.backRightMotor = relays.backRightMotor.relayData;
+	relayData.front_left_motor = relays.frontLeftMotor.relayData;
+	relayData.front_right_motor = relays.frontRightMotor.relayData;
+	relayData.back_left_motor = relays.backLeftMotor.relayData;
+	relayData.back_right_motor = relays.backRightMotor.relayData;
 
 	controlData.has_relays = true;
 	controlData.relays = relayData;
@@ -148,7 +148,7 @@ void sendData() {
 }
 
 void handleCommand(const uint8_t* data, int length) {
-	auto command = BurtProto::decode<ControlBoardCommand>(data, length, ControlBoardCommand_fields);
+	auto command = BurtProto::decode<ControlCommand>(data, length, ControlCommand_fields);
 	buttons.handleCommand(command.drive);
 	motors.handleCommand(command.drive);
 	cameras.handleCommand(command.drive);

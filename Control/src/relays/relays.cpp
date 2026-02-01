@@ -109,10 +109,10 @@ void Relays::update() {
 }
 
 void Relays::handleCommand(RelaysCommand command) {
-    backLeftMotor.handleCommand(command.backLeftMotor);
-    backRightMotor.handleCommand(command.backRightMotor);
-    frontLeftMotor.handleCommand(command.frontLeftMotor);
-    frontRightMotor.handleCommand(command.frontRightMotor);
+    backLeftMotor.handleCommand(command.back_left_motor);
+    backRightMotor.handleCommand(command.back_right_motor);
+    frontLeftMotor.handleCommand(command.front_left_motor);
+    frontRightMotor.handleCommand(command.front_right_motor);
     arm.handleCommand(command.arm);
     science.handleCommand(command.science);
 }
