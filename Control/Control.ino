@@ -74,9 +74,6 @@ void loop() {
 	buttons.update();
 	voltageSensor.update();
 	relays.update();
-
-	//debugging
-	//debugging
 }
 // haha oops -- remove later
 void sendData() {
@@ -125,6 +122,7 @@ void sendData() {
 	driveData.has_version = true;
 	driveData.version = version;
 
+	controlData.has_version = true;
 	controlData.version = version;
 
 	controlData.has_drive = true;
@@ -132,22 +130,15 @@ void sendData() {
 
 	relayData.arm = relays.arm.relayData;
 	relayData.science = relays.science.relayData;
-	relayData.frontLeftMotor = relays.frontLeftMotor.relayData;
-	relayData.frontRightMotor = relays.frontRightMotor.relayData;
-	relayData.backLeftMotor = relays.backLeftMotor.relayData;
-	relayData.backRightMotor = relays.backRightMotor.relayData;
+	relayData.front_left_motor = relays.frontLeftMotor.relayData;
+	relayData.front_right_motor = relays.frontRightMotor.relayData;
+	relayData.back_left_motor = relays.backLeftMotor.relayData;
+	relayData.back_right_motor = relays.backRightMotor.relayData;
 
 	controlData.has_relays = true;
 	controlData.relays = relayData;
-	
-	// Serial.println(driveData.battery_voltage);	// for debug
-	// Serial.println(controlData.drive.battery_voltage);	// for debug
 
 	serial.send(&controlData);
-	
-	// debugging
-	// Serial.println(controlData.version);
-	// debugging
 }
 
 void handleCommand(const uint8_t* data, int length) {
