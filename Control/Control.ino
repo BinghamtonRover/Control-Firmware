@@ -74,6 +74,9 @@ void loop() {
 	buttons.update();
 	voltageSensor.update();
 	relays.update();
+
+	//debugging
+	//debugging
 }
 // haha oops -- remove later
 void sendData() {
@@ -122,6 +125,8 @@ void sendData() {
 	driveData.has_version = true;
 	driveData.version = version;
 
+	controlData.version = version;
+
 	controlData.has_drive = true;
 	controlData.drive = driveData;
 
@@ -136,6 +141,10 @@ void sendData() {
 	controlData.relays = relayData;
 
 	serial.send(&controlData);
+	
+	// debugging
+	// Serial.println(controlData.version);
+	// debugging
 }
 
 void handleCommand(const uint8_t* data, int length) {
