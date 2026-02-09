@@ -4,40 +4,58 @@
 #include "led_strip.h"
 
 void LedStrip::setup() {
-  pinMode(redPin, OUTPUT);
-  pinMode(greenPin, OUTPUT);
-  pinMode(bluePin, OUTPUT);
+  FastLED.addLeds<LPD8806, DATA_PIN, CLOCK_PIN, BRG>(ledStrip, STRIP_LENGTH);
+  FastLED.setBrightness(100);
+  FastLED.setCorrection(TypicalLEDStrip);
   blue();
 }
 
+void LedStrip::setColor(ProtoColor color) {
+  CRGB toWrite = CRGB::Black;
+
+  switch (color) {
+    case ProtoColor::ProtoColor_PROTO_COLOR_UNDEFINED:
+    case ProtoColor::ProtoColor_UNLIT:
+      break;
+    case ProtoColor::ProtoColor_RED:
+      toWrite = CRGB::Red;
+      break;
+    case ProtoColor::ProtoColor_GREEN:
+      toWrite = CRGB::Green;
+      break;
+    case ProtoColor::ProtoColor_BLUE:
+      toWrite = CRGB::Blue;
+      break;
+  }
+
+  if (toWrite == writtenColor) {
+    return;
+  }
+  writtenColor = toWrite;
+  fill_solid(ledStrip, STRIP_LENGTH, toWrite);
+  FastLED.show();
+}
+
 void LedStrip::red() {
-  redValue = HIGH;
-  greenValue = LOW;
-  blueValue = LOW;
+  setColor(ProtoColor::ProtoColor_RED);
   data.color = ProtoColor::ProtoColor_RED;
   oldColor = ProtoColor::ProtoColor_RED;
 }
 
 void LedStrip::green() {
-  redValue = LOW;
-  greenValue = HIGH;
-  blueValue = LOW;
+  setColor(ProtoColor::ProtoColor_GREEN);
   data.color = ProtoColor::ProtoColor_GREEN;
   oldColor = ProtoColor::ProtoColor_GREEN;
 }
 
 void LedStrip::blue() {
-  redValue = LOW;
-  greenValue = LOW;
-  blueValue = HIGH;
+  setColor(ProtoColor::ProtoColor_BLUE);
   data.color = ProtoColor::ProtoColor_BLUE;
   oldColor = ProtoColor::ProtoColor_BLUE;
 }
 
 void LedStrip::off() {
-  digitalWrite(redPin, LOW);
-  digitalWrite(greenPin, LOW);
-  digitalWrite(bluePin, LOW);
+  setColor(ProtoColor::ProtoColor_UNLIT);
   data.color = ProtoColor::ProtoColor_UNLIT;
 }
 
@@ -45,9 +63,7 @@ void LedStrip::update() {
   if (shouldBlink && !isOn) {
     off();
   } else {
-    digitalWrite(redPin, redValue);
-    digitalWrite(greenPin, greenValue);
-    digitalWrite(bluePin, blueValue);
+    setColor(oldColor);
     data.color = oldColor;
   }
   isOn = !isOn;
