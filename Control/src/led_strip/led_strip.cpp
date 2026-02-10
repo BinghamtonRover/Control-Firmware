@@ -33,7 +33,9 @@ void LedStrip::setColor(ProtoColor color) {
   }
   writtenColor = toWrite;
   fill_solid(ledStrip, stripLength, toWrite);
+  noInterrupts();
   FastLED.show();
+  interrupts();
 }
 
 void LedStrip::red() {
