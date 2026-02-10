@@ -42,6 +42,7 @@ void setup() {
 	Serial.println("Initializing Drive subsystem");
   	pinMode(errorPin, OUTPUT);
 	Serial.begin(9600);
+
 	Serial.println("Initializing software...");
 	motorCan.setup();
 	serial.setup();
@@ -52,7 +53,6 @@ void setup() {
 	relays.setup();
 	voltageSensor.setup();
 
-
 	Serial.println("Initializing hardware...");
 	motors.setup();
 	buttons.setup();
@@ -61,26 +61,26 @@ void setup() {
 	voltageSensor.setup();
 	temperatureSensor.setup();
 
-  Serial.println("Drive subsystem initialized");
+	Serial.println("Drive subsystem initialized");
 }
 
 void loop() {
 	serial.update();
 	motorCan.update();
-	dataTimer.update();
-	motorTimer.update();
 	blinkTimer.update();
 	temperatureSensor.update();
 	buttons.update();
 	voltageSensor.update();
 	relays.update();
+	dataTimer.update();
+	motorTimer.update();
 }
 
 void sendData() {
-  DriveData driveData = DriveData_init_zero;
-  RelaysData relayData = RelaysData_init_zero;
+	DriveData driveData = DriveData_init_zero;
+	RelaysData relayData = RelaysData_init_zero;
 
-  ControlData controlData = ControlData_init_zero;
+	ControlData controlData = ControlData_init_zero;
 
 	// Drive Motor Data
 	driveData.has_front_left_motor = motors.data.has_front_left_motor;

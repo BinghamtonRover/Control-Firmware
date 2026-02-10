@@ -4,8 +4,8 @@
 #include "led_strip.h"
 
 void LedStrip::setup() {
-  FastLED.addLeds<LPD8806, DATA_PIN, CLOCK_PIN, BRG>(ledStrip, STRIP_LENGTH);
-  FastLED.setBrightness(100);
+  FastLED.addLeds<LPD8806, dataPin, clockPin, BRG>(ledStrip, stripLength);
+  FastLED.setBrightness(255);
   FastLED.setCorrection(TypicalLEDStrip);
   blue();
 }
@@ -32,7 +32,7 @@ void LedStrip::setColor(ProtoColor color) {
     return;
   }
   writtenColor = toWrite;
-  fill_solid(ledStrip, STRIP_LENGTH, toWrite);
+  fill_solid(ledStrip, stripLength, toWrite);
   FastLED.show();
 }
 

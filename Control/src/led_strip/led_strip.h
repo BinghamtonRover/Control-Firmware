@@ -5,9 +5,9 @@
 
 const int blinkInterval = 250;  // ms
 
-#define DATA_PIN 11
-#define CLOCK_PIN 8
-#define STRIP_LENGTH 32
+constexpr uint8_t dataPin = 11;
+constexpr uint8_t clockPin = 8;
+constexpr int stripLength = 32;
 
 /// The RGB LED strip that goes around the rover.
 class LedStrip {
@@ -21,7 +21,7 @@ class LedStrip {
     /// What the old color of the
     ProtoColor oldColor = ProtoColor::ProtoColor_UNLIT;
 
-    CRGB ledStrip[STRIP_LENGTH];
+    CRGB ledStrip[stripLength];
 
     void setColor(ProtoColor color);
 

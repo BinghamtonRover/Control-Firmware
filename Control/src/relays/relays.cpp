@@ -36,8 +36,6 @@ void Relay::handleCommand(BoolState command) {
 }
 
 void Relays::setup() {
-    delay(250);
-
     backLeftMotor.setup();
     Serial.println("Back left motor relay initialized");
 
@@ -57,46 +55,41 @@ void Relays::setup() {
     Serial.println("Science relay initialized");
 
     lDampRelay.setup();
-    Serial.println("Left dampener relay engaged");
-    delay(250);
+    Serial.println("Left dampener relay initialized");
 
     rDampRelay.setup();
-    Serial.println("Right dampener relay engaged");
-    delay(250);
-    
-    delay(250);
+    Serial.println("Right dampener relay initialized");
 
     backLeftMotor.turnOn();
     Serial.println("Back left motor relay engaged");
-    delay(250);
 
+    delay(100);
     backRightMotor.turnOn();
     Serial.println("Back right motor relay engaged");
-    delay(250);
 
+    delay(100);
     frontLeftMotor.turnOn();
     Serial.println("Front left motor relay engaged");
-    delay(250);
-    
+
+    delay(100);
     frontRightMotor.turnOn();
     Serial.println("Front right motor relay engaged");
-    delay(250);
 
+    delay(100);
     lDampRelay.turnOn();   // temporary fix until dampening motors are implemenented
     Serial.println("Left dampener relay engaged");
-    delay(250);
 
+    delay(100);
     rDampRelay.turnOn();   // temporary fix until dampening motors are implemenented
     Serial.println("Right dampener relay engaged");
-    delay(250);
 
+    delay(100);
     arm.turnOn();
     Serial.println("Arm relay engaged");
-    delay(250);
-    
+
+    delay(100);
     science.turnOn();
     Serial.println("Science relay engaged");
-    delay(250);
 }
 
 void Relays::update() {
