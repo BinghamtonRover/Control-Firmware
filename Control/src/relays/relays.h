@@ -92,8 +92,8 @@ public:
     Relay frontRightMotor = Relay(fRightRelayPin);
 
     // Dampening Motors
-    Relay lDampRelay = Relay(lDampRelayPin);
-    Relay rDampRelay = Relay(rDampRelayPin);
+    Relay leftDampeningMotor = Relay(lDampRelayPin);
+    Relay rightDampeningMotor = Relay(rDampRelayPin);
 
     // Arm, Science, and Drive
     Relay arm = Relay(armRelayPin);

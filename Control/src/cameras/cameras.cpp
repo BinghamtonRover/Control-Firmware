@@ -3,11 +3,11 @@
 
 void Cameras::setup() {
   frontSwivel.attach(frontSwivelPin);
-  delay(2000);
+  delay(250);
   frontTilt.attach(frontTiltPin);
-  delay(2000);
+  delay(250);
   backSwivel.attach(backSwivelPin);
-  delay(2000);
+  delay(250);
   backTilt.attach(backTiltPin);
 }
 
