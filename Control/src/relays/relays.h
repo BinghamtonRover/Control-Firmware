@@ -90,8 +90,6 @@ public:
     Relay backRightMotor = Relay(bRightRelayPin);
     Relay frontLeftMotor = Relay(fLeftRelayPin);
     Relay frontRightMotor = Relay(fRightRelayPin);
-
-    // Dampening Motors
     Relay middleLeftMotor = Relay(mLeftRelayPin);
     Relay middleRightMotor = Relay(mRightRelayPin);
 
