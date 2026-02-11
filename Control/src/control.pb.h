@@ -80,8 +80,8 @@ extern const pb_msgdesc_t ControlData_msg;
 
 /* Maximum encoded size of messages (where known) */
 #define CONTROL_PB_H_MAX_SIZE                    ControlData_size
-#define ControlCommand_size                      143
-#define ControlData_size                         322
+#define ControlCommand_size                      141
+#define ControlData_size                         320
 
 #ifdef __cplusplus
 } /* extern "C" */
