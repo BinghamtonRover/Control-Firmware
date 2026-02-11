@@ -110,10 +110,10 @@ void Relays::handleCommand(RelaysCommand command) {
     backRightMotor.handleCommand(command.back_right_motor);
     frontLeftMotor.handleCommand(command.front_left_motor);
     frontRightMotor.handleCommand(command.front_right_motor);
+    leftDampeningMotor.handleCommand(command.middle_left_motor);
+    rightDampeningMotor.handleCommand(command.middle__right_motor);
     arm.handleCommand(command.arm);
     science.handleCommand(command.science);
-    leftDampeningMotor.handleCommand(command.left_dampening_motor);
-    rightDampeningMotor.handleCommand(command.right_dampening_motor);
 }
 
 // void OverrideSwitch::setup() {
