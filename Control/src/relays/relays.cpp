@@ -49,6 +49,12 @@ void Relays::setup() {
 
     frontRightMotor.setup();
     Serial.println("Front right motor relay initialized");
+    
+    middleLeftMotor.setup();
+    Serial.println("Middle left motor relay initialized");
+
+    middleRightMotor.setup();
+    Serial.println("Middle right motor relay initialized");
 
     arm.setup();
     Serial.println("Arm relay initialized");
@@ -56,11 +62,6 @@ void Relays::setup() {
     science.setup();
     Serial.println("Science relay initialized");
 
-    leftDampeningMotor.setup();
-    Serial.println("Left dampener relay initialized");
-
-    rightDampeningMotor.setup();
-    Serial.println("Right dampener relay initialized");
 
     backLeftMotor.turnOn();
     Serial.println("Back left motor relay engaged");
@@ -79,11 +80,11 @@ void Relays::setup() {
 
     delay(100);
     middleLeftMotor.turnOn();
-    Serial.println("Middle left relay engaged");
+    Serial.println("Middle left motor relay engaged");
 
     delay(100);
     middleRightMotor.turnOn();
-    Serial.println("Middle right relay engaged");
+    Serial.println("Middle right motor relay engaged");
 
     delay(100);
     arm.turnOn();
