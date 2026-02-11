@@ -78,11 +78,11 @@ void Relays::setup() {
     Serial.println("Front right motor relay engaged");
 
     delay(100);
-    leftDampeningMotor.turnOn();   // temporary fix until dampening motors are implemenented
+    middleLeftMotor.turnOn();
     Serial.println("Left dampener relay engaged");
 
     delay(100);
-    rightDampeningMotor.turnOn();   // temporary fix until dampening motors are implemenented
+    middleRightMotor.turnOn();
     Serial.println("Right dampener relay engaged");
 
     delay(100);
@@ -99,10 +99,10 @@ void Relays::update() {
     backRightMotor.update();
     frontLeftMotor.update();
     frontRightMotor.update();
+    middleLeftMotor.update();
+    middleRightMotor.update();
     arm.update();
     science.update();
-    leftDampeningMotor.update();
-    rightDampeningMotor.update();
 }
 
 void Relays::handleCommand(RelaysCommand command) {
