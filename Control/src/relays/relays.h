@@ -6,18 +6,18 @@
 
 /// @brief Define the Teensy pins for the relays [Subject to change]
 // Drive Motors
-const int bLeftRelayPin = 25;
-const int bRightRelayPin = 19;
-const int fLeftRelayPin = 29;
-const int fRightRelayPin = 15;
+static const uint_8 bLeftRelayPin = 25;
+static const uint_8 bRightRelayPin = 19;
+static const uint_8 fLeftRelayPin = 29;
+static const uint_8 fRightRelayPin = 15;
+static const uint_8 mLeftRelayPin = 32;
+static const uint_8 mRightRelayPin = 39;
 
-// Dampening Relays
-const int lDampRelayPin = 32;
-const int rDampRelayPin = 39;
+// Dampening relays are being used for middle motors for now, so they are defined as mRightRelayPin and mLeftRelayPin above
 
 // Arm and Science
-const int armRelayPin = 38;
-const int scienceRelayPin = 7;
+static const uint_8 armRelayPin = 38;
+static const uint_8 scienceRelayPin = 7;
 
 /// @brief Class to represent a relay on the relay board
 ///
