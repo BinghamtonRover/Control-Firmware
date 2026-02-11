@@ -32,13 +32,13 @@ static const uint_8 scienceRelayPin = 7;
 ///     softwareState: The state of the relay specified by the software, initially false
 class Relay {
 private: 
-    int relayPin;
+    uint_8 relayPin;
     bool softwareState = false;        
 
 public: 
     /// @brief Constructs a Relay object with specified output pin.
     /// @param outputPin The Teensy pin that the relay is connected to.
-    Relay(int relayPin) : relayPin(relayPin) {}
+    Relay(uint_8 relayPin) : relayPin(relayPin) {}
 
     /// @brief Set up the relay by setting the pin mode
     /// Call for each relay in the setup() function of the Relays class

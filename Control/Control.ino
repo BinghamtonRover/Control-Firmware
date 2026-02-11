@@ -12,7 +12,7 @@
 
 const Version version = {major: 1, minor: 3};
 
-const int errorPin = 33;
+const uint_8 errorPin = 33;
 
 void handleCommand(const uint8_t* data, int length);
 
