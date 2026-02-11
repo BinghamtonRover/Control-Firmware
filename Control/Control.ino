@@ -134,8 +134,8 @@ void sendData() {
 	relayData.front_right_motor = relays.frontRightMotor.relayData;
 	relayData.back_left_motor = relays.backLeftMotor.relayData;
 	relayData.back_right_motor = relays.backRightMotor.relayData;
-	relayData.left_dampening_motor = relays.leftDampeningMotor.relayData;
-	relayData.right_dampening_motor = relays.rightDampeningMotor.relayData;
+	relayData.middle_left_motor = relays.middleLeftMotor.relayData;
+	relayData.middle_right_motor = relays.middleRightMotor.relayData;
 
 	relayData.battery_voltage = voltageSensor.data.battery_voltage;
 
