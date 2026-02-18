@@ -111,7 +111,7 @@ void Relays::handleCommand(RelaysCommand command) {
     backRightMotor.handleCommand(command.back_right_motor);
     frontLeftMotor.handleCommand(command.front_left_motor);
     frontRightMotor.handleCommand(command.front_right_motor);
-    middleLeftMotorMotor.handleCommand(command.middle_left_motor);
+    middleLeftMotor.handleCommand(command.middle_left_motor);
     middleRightMotor.handleCommand(command.middle_right_motor);
     arm.handleCommand(command.arm);
     science.handleCommand(command.science);

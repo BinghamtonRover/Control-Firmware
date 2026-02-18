@@ -6,18 +6,18 @@
 
 /// @brief Define the Teensy pins for the relays [Subject to change]
 // Drive Motors
-static const uint_8 bLeftRelayPin = 25;
-static const uint_8 bRightRelayPin = 19;
-static const uint_8 fLeftRelayPin = 29;
-static const uint_8 fRightRelayPin = 15;
-static const uint_8 mLeftRelayPin = 32;
-static const uint_8 mRightRelayPin = 39;
+static const uint8_t bLeftRelayPin = 25;
+static const uint8_t bRightRelayPin = 19;
+static const uint8_t fLeftRelayPin = 29;
+static const uint8_t fRightRelayPin = 15;
+static const uint8_t mLeftRelayPin = 32;
+static const uint8_t mRightRelayPin = 39;
 
 // Dampening relays are being used for middle motors for now, so they are defined as mRightRelayPin and mLeftRelayPin above
 
 // Arm and Science
-static const uint_8 armRelayPin = 38;
-static const uint_8 scienceRelayPin = 7;
+static const uint8_t armRelayPin = 38;
+static const uint8_t scienceRelayPin = 7;
 
 /// @brief Class to represent a relay on the relay board
 ///
@@ -32,13 +32,13 @@ static const uint_8 scienceRelayPin = 7;
 ///     softwareState: The state of the relay specified by the software, initially false
 class Relay {
 private: 
-    uint_8 relayPin;
+    uint8_t relayPin;
     bool softwareState = false;        
 
 public: 
     /// @brief Constructs a Relay object with specified output pin.
     /// @param outputPin The Teensy pin that the relay is connected to.
-    Relay(uint_8 relayPin) : relayPin(relayPin) {}
+    Relay(uint8_t relayPin) : relayPin(relayPin) {}
 
     /// @brief Set up the relay by setting the pin mode
     /// Call for each relay in the setup() function of the Relays class
