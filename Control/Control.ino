@@ -2,7 +2,7 @@
 
 #include "pinouts.h"
 #include "src/utils/BURT_utils.h"
-#include "src/control_board.pb.h"
+#include "src/control.pb.h"
 
 #define DRIVE_COMMAND_ID   0x53
 #define DRIVE_DATA_ID      0x14
@@ -10,9 +10,9 @@
 #define DATA_SEND_INTERVAL 50  // ms (relays was 250 ms, drive was 50ms, so chose the smaller one)
 #define MOTOR_UPDATE_INTERVAL 10  // ms
 
-const Version version = {major: 1, minor: 2};
+const Version version = {major: 1, minor: 3};
 
-const int errorPin = 9;
+const uint8_t errorPin = 33;
 
 void handleCommand(const uint8_t* data, int length);
 
@@ -20,7 +20,7 @@ void handleMotorOutput(const CanMessage& message) {
   motors.handleMotorOutput(message);
 }
 
-BurtSerial serial(Device::Device_CONTROL_BOARD, handleCommand, ControlBoardData_fields, ControlBoardData_size);
+BurtSerial serial(Device::Device_CONTROL_BOARD, handleCommand, ControlData_fields, ControlData_size);
 
 // AK motors send data in the format (0x29 << 8) | MOTOR_ID
 //
@@ -40,8 +40,9 @@ BurtTimer blinkTimer(blinkInterval, updateLedStrip);
 
 void setup() {
 	Serial.println("Initializing Drive subsystem");
-  pinMode(errorPin, OUTPUT);
+  	pinMode(errorPin, OUTPUT);
 	Serial.begin(9600);
+
 	Serial.println("Initializing software...");
 	motorCan.setup();
 	serial.setup();
@@ -52,7 +53,6 @@ void setup() {
 	relays.setup();
 	voltageSensor.setup();
 
-
 	Serial.println("Initializing hardware...");
 	motors.setup();
 	buttons.setup();
@@ -61,26 +61,26 @@ void setup() {
 	voltageSensor.setup();
 	temperatureSensor.setup();
 
-  Serial.println("Drive subsystem initialized");
+	Serial.println("Drive subsystem initialized");
 }
 
 void loop() {
 	serial.update();
 	motorCan.update();
-	dataTimer.update();
-	motorTimer.update();
 	blinkTimer.update();
 	temperatureSensor.update();
 	buttons.update();
 	voltageSensor.update();
 	relays.update();
+	dataTimer.update();
+	motorTimer.update();
 }
-// haha oops -- remove later
-void sendData() {
-  DriveData driveData = DriveData_init_zero;
-  RelaysData relayData = RelaysData_init_zero;
 
-  ControlBoardData controlData = ControlBoardData_init_zero;
+void sendData() {
+	DriveData driveData = DriveData_init_zero;
+	RelaysData relayData = RelaysData_init_zero;
+
+	ControlData controlData = ControlData_init_zero;
 
 	// Drive Motor Data
 	driveData.has_front_left_motor = motors.data.has_front_left_motor;
@@ -122,16 +122,22 @@ void sendData() {
 	driveData.has_version = true;
 	driveData.version = version;
 
+	controlData.has_version = true;
+	controlData.version = version;
+
 	controlData.has_drive = true;
 	controlData.drive = driveData;
 
 	relayData.arm = relays.arm.relayData;
 	relayData.science = relays.science.relayData;
-	relayData.drive = relays.drive.relayData;
-	relayData.frontLeftMotor = relays.frontLeftMotor.relayData;
-	relayData.frontRightMotor = relays.frontRightMotor.relayData;
-	relayData.backLeftMotor = relays.backLeftMotor.relayData;
-	relayData.backRightMotor = relays.backRightMotor.relayData;
+	relayData.front_left_motor = relays.frontLeftMotor.relayData;
+	relayData.front_right_motor = relays.frontRightMotor.relayData;
+	relayData.back_left_motor = relays.backLeftMotor.relayData;
+	relayData.back_right_motor = relays.backRightMotor.relayData;
+	relayData.middle_left_motor = relays.middleLeftMotor.relayData;
+	relayData.middle_right_motor = relays.middleRightMotor.relayData;
+
+	relayData.battery_voltage = voltageSensor.data.battery_voltage;
 
 	controlData.has_relays = true;
 	controlData.relays = relayData;
@@ -140,7 +146,7 @@ void sendData() {
 }
 
 void handleCommand(const uint8_t* data, int length) {
-	auto command = BurtProto::decode<ControlBoardCommand>(data, length, ControlBoardCommand_fields);
+	auto command = BurtProto::decode<ControlCommand>(data, length, ControlCommand_fields);
 	buttons.handleCommand(command.drive);
 	motors.handleCommand(command.drive);
 	cameras.handleCommand(command.drive);

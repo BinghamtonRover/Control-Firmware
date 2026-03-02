@@ -1,24 +1,17 @@
 #include "../drive.pb.h"
 #include "../utils/BURT_timer.h"
 
+#include "FastLED.h"
+
 const int blinkInterval = 250;  // ms
 
-const int redPin = 14;
-const int greenPin = 15;
-const int bluePin = 16;
+constexpr uint8_t dataPin = 11;
+constexpr uint8_t clockPin = 8;
+constexpr int stripLength = 32;
 
 /// The RGB LED strip that goes around the rover.
 class LedStrip {
   private:
-    /// Whether to light the red LEDs.
-    bool redValue;
-
-    /// Whether to light the green LEDs.
-    bool greenValue;
-
-    /// Whether to light the blue LEDs.
-    bool blueValue;
-
     /// Whether the LED strip is currently lit during this phase of blinking.
     ///
     /// When #shouldBlink is true, #update will alternate this value to be on and off
@@ -27,6 +20,12 @@ class LedStrip {
 
     /// What the old color of the
     ProtoColor oldColor = ProtoColor::ProtoColor_UNLIT;
+
+    CRGB ledStrip[stripLength];
+
+    void setColor(ProtoColor color);
+
+    CRGB writtenColor = 0;
 
   public:
     /// The current status of the LED strip.

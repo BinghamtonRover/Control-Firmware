@@ -1,10 +1,10 @@
 #include <Arduino.h>
 #include "../drive.pb.h"
 
-const int greenLedPin = 2;
-const int greenButtonPin = 7;
-const int yellowLedPin = 3;
-const int yellowButtonPin = 6;
+const int greenLedPin = 26; 
+const int greenButtonPin = 14;
+const int yellowLedPin = 1;
+const int yellowButtonPin = 9;
 
 /// An button that has an LED built into it.
 ///
